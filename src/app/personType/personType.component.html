@@ -1,0 +1,65 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <dx-data-grid
+          id="gridFaceReport"
+          [dataSource]="personTypeData"
+          [showRowLines]="true"
+          [showBorders]="true"
+          [allowColumnReordering]="true"
+          [allowColumnResizing]="true"
+          [columnAutoWidth]="true"
+          [rowAlternationEnabled]="true"
+        >
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-search-panel
+            [visible]="true"
+            [width]="240"
+            placeholder="Search..."
+          ></dxo-search-panel>
+          <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+          <dxi-column dataField="no" caption="#"></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="createdDate"
+            dataType="date"
+            [width]="100"
+            caption="Date / Time"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="faceimage_uri"
+            caption="Face image"
+            [width]="150"
+            cellTemplate="cellTemplate"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="sceneimage_uri"
+            caption="Screen image"
+            [width]="150"
+            cellTemplate="cellTemplate"
+          ></dxi-column>
+          <dxi-column
+            dataField="meta.gender.name"
+            caption="Gender"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="meta.age"
+            caption="Age"
+          ></dxi-column>
+          <dxi-column caption="BirthDate"></dxi-column>
+          <dxi-column caption="Religion"></dxi-column>
+          <dxi-column caption="Nationality"></dxi-column>
+          <dxi-column caption="Address"></dxi-column>
+          <dxi-column dataField="personType.name" caption="Type"></dxi-column>
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <img [src]="data.value" [height]="100" [width]="100" />
+          </div>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+</div>

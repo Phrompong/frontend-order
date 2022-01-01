@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12 ml-auto mr-auto">
+            <form
+              #searchDataFace="ngForm"
+              (ngSubmit)="search(searchDataFace.value)"
+            >
+              <div class="row">
+                <div
+                  class="col-md-1"
+                  style="padding: auto; margin: auto; font-size: 20px"
+                >
+                  <b>Date</b>
+                </div>
+                <div
+                  class="col-md-1"
+                  style="padding: auto; margin: auto; text-align: right"
+                >
+                  From
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      [matDatepicker]="startDate"
+                      placeholder="mm/dd/yyyy"
+                      (click)="startDate.open()"
+                      name="startDate"
+                      id="startDate"
+                      ngModel
+                      [(ngModel)]="startDateV"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="startDate"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #startDate></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-md-1"
+                  style="padding: auto; margin: auto; text-align: right"
+                >
+                  To
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      [matDatepicker]="endDate"
+                      placeholder="mm/dd/yyyy"
+                      (click)="endDate.open()"
+                      name="endDate"
+                      ngModel
+                      [(ngModel)]="endDateV"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="endDate"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #endDate></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <button
+                    mat-raised-button
+                    class="btn btn-round"
+                    style="background-color: #5378e2"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6" style="height: 200px">
+    <div class="card">
+      <div class="row"></div>
+      <div class="card-body" style="text-align: center">
+        <div class="row" style="font-size: 60px">
+          <div class="col-lg-12" style="padding-top: 30px">
+            <b style="color: #6f6eff">{{ alertCount }}</b>
+          </div>
+        </div>
+        <div class="row" style="font-size: 20px; padding: 50px 0px 30px 0px">
+          <div class="col-lg-12" style="font-size: 50px">
+            <b>Alerts</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6" style="height: 200px">
+    <div class="card">
+      <div class="row"></div>
+      <div class="card-body" style="text-align: center">
+        <div class="row" style="font-size: 60px">
+          <div class="col-lg-12" style="text-align: center; padding-top: 30px">
+            <b style="color: #ec8dff">{{ snapshotCount }}</b>
+          </div>
+        </div>
+        <div class="row" style="font-size: 20px; padding: 50px 0px 30px 0px">
+          <div class="col-lg-12" style="text-align: center; font-size: 50px">
+            <b>Snapshots</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="row">
+        <div class="col-lg-12" style="padding: 12px 0px 12px 27px">
+          <b style="font-size: 20px">The past 7 days</b>
+        </div>
+      </div>
+      <div class="card-body">
+        <canvas height="100" id="staticReport"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

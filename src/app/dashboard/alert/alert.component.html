@@ -1,0 +1,569 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-12 ml-auto mr-auto">
+        <form
+          #searchDataFace="ngForm"
+          (ngSubmit)="search(searchDataFace.value)"
+        >
+          <div class="row">
+            <div
+              class="col-md-1"
+              style="padding: auto; margin: auto; font-size: 20px"
+            >
+              <b>Date</b>
+            </div>
+            <div
+              class="col-md-1"
+              style="padding: auto; margin: auto; text-align: right"
+            >
+              From
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input
+                  matInput
+                  [matDatepicker]="startDate"
+                  placeholder="mm/dd/yyyy"
+                  (click)="startDate.open()"
+                  name="startDate"
+                  id="startDate"
+                  [(ngModel)]="startDateV"
+                  ngModel
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="startDate"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div
+              class="col-md-1"
+              style="padding: auto; margin: auto; text-align: right"
+            >
+              To
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input
+                  matInput
+                  [matDatepicker]="endDate"
+                  placeholder="mm/dd/yyyy"
+                  (click)="endDate.open()"
+                  name="endDate"
+                  [(ngModel)]="endDateV"
+                  ngModel
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="endDate"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <button
+                mat-raised-button
+                class="btn btn-round"
+                style="background-color: #5378e2"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12" style="padding-left: 0px; padding-right: 0px">
+  <div class="row">
+    <!-- Age and Gender -->
+    <div class="col-lg-6" style="padding-bottom: 5px; padding-right: 5px">
+      <div class="card" style="height: 400px; margin-bottom: 5px">
+        <div class="row">
+          <div class="col-lg-10" style="padding: 12px 0px 12px 27px">
+            <b style="font-size: 20px">Age and Gender</b>
+          </div>
+          <div class="col-lg-2">
+            <div class="col-lg-1" style="display: flex; align-items: flex-end">
+              <img
+                src="./assets/img/view.png"
+                style="height: 30px"
+                (click)="openModal(1)"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          style="display: flex; justify-content: center; align-items: baseline"
+        >
+          <div style="font-size: 35px; color: #6f6eff">
+            <b>{{ male }}</b>
+          </div>
+          <div>
+            <img src="./assets/icon/Men.png" style="height: 50px" />
+          </div>
+          <div
+            style="
+              text-align: center;
+              font-size: 35px;
+              color: #ec8dff;
+              padding-left: 10px;
+            "
+          >
+            <b>{{ female }}</b>
+          </div>
+          <div>
+            <img src="./assets/icon/Women.png" style="height: 50px" />
+          </div>
+        </div>
+        <div class="card-body" style="padding-bottom: 0px">
+          <canvas id="ageGenderChartAlert"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- End Age and Gender -->
+
+    <!-- Items -->
+    <div class="col-lg-6" style="padding-bottom: 5px; padding-left: 5px">
+      <div class="card" style="height: 400px; margin-bottom: 5px">
+        <div class="row">
+          <div class="col-lg-10" style="padding: 12px 0px 12px 27px">
+            <b style="font-size: 20px">Items</b>
+          </div>
+          <div class="col-lg-2">
+            <div class="col-lg-1" style="display: flex; align-items: flex-end">
+              <img
+                src="./assets/img/view.png"
+                style="height: 30px"
+                (click)="openModal(2)"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="row">
+            <div
+              class="col-lg-6 border-right border-bottom"
+              style="padding-bottom: 15px"
+            >
+              <div class="d-flex flex-column align-items-center">
+                <b style="font-size: 30px">Glasses</b>
+                <img src="./assets/icon/Glass.png" width="100" />
+                <b style="color: #6f6eff; font-size: 20px">{{ glasses }}</b>
+              </div>
+            </div>
+            <div class="col-lg-6 border-bottom" style="padding-bottom: 15px">
+              <div class="d-flex flex-column align-items-center">
+                <b style="font-size: 30px">Sunglass</b>
+                <img src="./assets/icon/Sunglass.png" width="100" />
+                <b style="color: #6f6eff; font-size: 20px">{{ sunGlasses }}</b>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 border-right">
+              <div
+                class="d-flex flex-column align-items-center"
+                style="padding-top: 15px"
+              >
+                <b style="font-size: 30px">Mask</b>
+                <img src="./assets/icon/Mask.png" width="100" />
+                <b style="color: #6f6eff; font-size: 20px">{{ mask }}</b>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div
+                class="d-flex flex-column align-items-center"
+                style="padding-top: 15px"
+              >
+                <b style="font-size: 30px">Hat</b>
+                <img src="./assets/icon/Hat.png" width="100" />
+                <b style="color: #6f6eff; font-size: 20px">{{ hat }}</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12" style="padding-left: 15px; padding-right: 15px">
+      <div class="row">
+        <div class="col-lg-6" style="padding-bottom: 5px; padding-right: 5px">
+          <div
+            class="card"
+            style="height: 400px; margin-top: 5px; margin-bottom: 5px"
+          >
+            <div class="row">
+              <div class="col-lg-10" style="padding: 12px 0px 12px 27px">
+                <b style="font-size: 20px">Skin</b>
+              </div>
+              <div class="col-lg-2">
+                <div
+                  class="col-lg-1"
+                  style="display: flex; align-items: flex-end"
+                >
+                  <!-- <a href="#" data-toggle="modal" data-target="#Item"> -->
+                  <img
+                    src="./assets/img/view.png"
+                    style="height: 30px"
+                    (click)="openModal(3)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <canvas height="170" id="skinChartAlert"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" style="padding-bottom: 5px; padding-left: 5px">
+          <div
+            class="card"
+            style="height: 400px; margin-top: 5px; margin-bottom: 5px"
+          >
+            <div class="row">
+              <div class="col-lg-10" style="padding: 12px 0px 12px 27px">
+                <b style="font-size: 20px">Hair style</b>
+              </div>
+              <div class="col-lg-2">
+                <div
+                  class="col-lg-1"
+                  style="display: flex; align-items: flex-end"
+                >
+                  <!-- <a href="#" data-toggle="modal" data-target="#Item"> -->
+                  <img
+                    src="./assets/img/view.png"
+                    style="height: 30px"
+                    (click)="openModal(4)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <canvas height="170" id="hairStyleAlert"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6"></div>
+      </div>
+    </div>
+    <div class="col-lg-12" style="padding-left: 15px; padding-right: 15px">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card" style="height: 600px; margin-top: 5px">
+            <div class="row">
+              <div class="col-lg-11" style="padding: 12px 0px 12px 27px">
+                <b style="font-size: 20px">Type</b>
+              </div>
+              <div class="col-lg-1">
+                <div style="display: flex; align-items: flex-end">
+                  <!-- <a href="#" data-toggle="modal" data-target="#Item"> -->
+                  <img
+                    src="./assets/img/view.png"
+                    style="height: 30px"
+                    (click)="openModal(5)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="card-body" style="padding-bottom: 0px">
+              <canvas height="130" id="typeChartAlert"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Age and Gender -->
+    <dx-popup
+      [showTitle]="true"
+      title="Age & Gender"
+      [closeOnOutsideClick]="true"
+      [(visible)]="ageGenderVisible"
+    >
+      <dx-scroll-view width="100%" height="100%">
+        <dx-data-grid
+          id="gridFaceReport"
+          [dataSource]="ageGenderReportData"
+          [showRowLines]="true"
+          [showBorders]="true"
+          [allowColumnReordering]="true"
+          [allowColumnResizing]="true"
+          [columnAutoWidth]="true"
+          [rowAlternationEnabled]="true"
+        >
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-search-panel
+            [visible]="true"
+            [width]="240"
+            placeholder="Search..."
+          ></dxo-search-panel>
+          <dxi-column dataField="no" caption="#"></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="faceImageUri"
+            caption="Face image"
+            [width]="150"
+            cellTemplate="cellTemplate"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="createdDate"
+            dataType="date"
+            format="dd/MM/yyyy HH:mm:ss"
+            caption="Date / Time"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="meta.age"
+            caption="Age"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="meta.gender.name"
+            caption="Gender"
+          ></dxi-column>
+          <dxi-column [visible]="false" caption="Location"></dxi-column>
+          <dxi-column [visible]="false" caption="Camera"></dxi-column>
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <img [src]="data.value" [height]="100" [width]="100" />
+          </div>
+        </dx-data-grid>
+      </dx-scroll-view>
+    </dx-popup>
+    <!-- End Modal Age and Gender -->
+
+    <!-- Modal Item -->
+    <dx-popup
+      [showTitle]="true"
+      title="Item"
+      [closeOnOutsideClick]="true"
+      [(visible)]="itemVisible"
+    >
+      <dx-scroll-view width="100%" height="100%">
+        <dx-data-grid
+          id="gridFaceReport"
+          [dataSource]="itemReportData"
+          [showRowLines]="true"
+          [showBorders]="true"
+          [allowColumnReordering]="true"
+          [allowColumnResizing]="true"
+          [columnAutoWidth]="true"
+          [rowAlternationEnabled]="true"
+        >
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-search-panel
+            [visible]="true"
+            [width]="240"
+            placeholder="Search..."
+          ></dxo-search-panel>
+          <dxi-column dataField="no" caption="#"></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="faceImageUri"
+            caption="Face image"
+            [width]="150"
+            cellTemplate="cellTemplate"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="createdDate"
+            caption="Date / Time"
+            dataType="date"
+            format="dd/MM/yyyy HH:mm:ss"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="meta.glasses"
+            caption="Glasses"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="meta.sunglass"
+            caption="Sunglass"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="meta.mask"
+            caption="Mask"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="meta.hat"
+            caption="Hat"
+          ></dxi-column>
+
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <img [src]="data.value" [height]="100" [width]="100" />
+          </div>
+        </dx-data-grid>
+      </dx-scroll-view>
+    </dx-popup>
+    <!-- End Modal Item -->
+
+    <!-- Modal Skin -->
+    <dx-popup
+      [showTitle]="true"
+      title="Skin"
+      [closeOnOutsideClick]="true"
+      [(visible)]="skinVisible"
+    >
+      <dx-scroll-view width="100%" height="100%">
+        <dx-data-grid
+          id="gridFaceReport"
+          [dataSource]="faceReportData"
+          [showRowLines]="true"
+          [showBorders]="true"
+          [allowColumnReordering]="true"
+          [allowColumnResizing]="true"
+          [columnAutoWidth]="true"
+          [rowAlternationEnabled]="true"
+        >
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-search-panel
+            [visible]="true"
+            [width]="240"
+            placeholder="Search..."
+          ></dxo-search-panel>
+
+          <dxi-column dataField="no" caption="#"></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="faceImageUri"
+            caption="Face image"
+            [width]="150"
+            cellTemplate="cellTemplate"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="createdDate"
+            dataType="date"
+            caption="Date / Time"
+            format="dd/MM/yyyy HH:mm:ss"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="meta.skin_color.name"
+            caption="Skin"
+          ></dxi-column>
+
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <img [src]="data.value" [height]="100" [width]="100" />
+          </div>
+        </dx-data-grid>
+      </dx-scroll-view>
+    </dx-popup>
+    <!-- End Modal Skin -->
+
+    <!-- Modal Hair -->
+    <dx-popup
+      [showTitle]="true"
+      title="hair style"
+      [closeOnOutsideClick]="true"
+      [(visible)]="hairVisible"
+    >
+      <dx-scroll-view width="100%" height="100%">
+        <dx-data-grid
+          id="gridFaceReport"
+          [dataSource]="faceReportData"
+          [showRowLines]="true"
+          [showBorders]="true"
+          [allowColumnReordering]="true"
+          [allowColumnResizing]="true"
+          [columnAutoWidth]="true"
+          [rowAlternationEnabled]="true"
+        >
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-search-panel
+            [visible]="true"
+            [width]="240"
+            placeholder="Search..."
+          ></dxo-search-panel>
+
+          <dxi-column dataField="no" caption="#"></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="faceImageUri"
+            caption="Face image"
+            [width]="150"
+            cellTemplate="cellTemplate"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="createdDate"
+            dataType="date"
+            caption="Date/Time"
+            format="dd/MM/yyyy HH:mm:ss"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="meta.hairstyle.name"
+            caption="Hair style"
+          ></dxi-column>
+
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <img [src]="data.value" [height]="100" [width]="100" />
+          </div>
+        </dx-data-grid>
+      </dx-scroll-view>
+    </dx-popup>
+    <!-- End Modal Hair -->
+
+    <!-- Modal Type -->
+    <dx-popup
+      [showTitle]="true"
+      title="Type"
+      [closeOnOutsideClick]="true"
+      [(visible)]="typeVisible"
+    >
+      <dx-scroll-view width="100%" height="100%">
+        <dx-data-grid
+          id="gridFaceReport"
+          [dataSource]="faceReportData"
+          [showRowLines]="true"
+          [showBorders]="true"
+          [allowColumnReordering]="true"
+          [allowColumnResizing]="true"
+          [columnAutoWidth]="true"
+          [rowAlternationEnabled]="true"
+        >
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-search-panel
+            [visible]="true"
+            [width]="240"
+            placeholder="Search..."
+          ></dxo-search-panel>
+
+          <dxi-column dataField="no" caption="#"></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="faceImageUri"
+            caption="Face image"
+            [width]="150"
+            cellTemplate="cellTemplate"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="createdDate"
+            dataType="date"
+            [width]="100"
+            caption="Date / Time"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="personType.name"
+            caption="type"
+          ></dxi-column>
+
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <img [src]="data.value" [height]="100" [width]="100" />
+          </div>
+        </dx-data-grid>
+      </dx-scroll-view>
+    </dx-popup>
+    <!-- End Modal Type -->
+  </div>
+</div>

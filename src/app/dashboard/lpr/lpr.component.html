@@ -1,0 +1,283 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-12 ml-auto mr-auto">
+        <form
+          #searchDataFace="ngForm"
+          (ngSubmit)="search(searchDataFace.value)"
+        >
+          <div class="row">
+            <div
+              class="col-md-1"
+              style="padding: auto; margin: auto; font-size: 20px"
+            >
+              <b>Date</b>
+            </div>
+            <div
+              class="col-md-1"
+              style="padding: auto; margin: auto; text-align: right"
+            >
+              From
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input
+                  matInput
+                  [matDatepicker]="startDate"
+                  placeholder="mm/dd/yyyy"
+                  (click)="startDate.open()"
+                  name="startDate"
+                  id="startDate"
+                  [(ngModel)]="startDateV"
+                  ngModel
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="startDate"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div
+              class="col-md-1"
+              style="padding: auto; margin: auto; text-align: right"
+            >
+              To
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input
+                  matInput
+                  [matDatepicker]="endDate"
+                  placeholder="mm/dd/yyyy"
+                  (click)="endDate.open()"
+                  name="endDate"
+                  [(ngModel)]="endDateV"
+                  ngModel
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="endDate"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <button
+                mat-raised-button
+                class="btn btn-round"
+                style="background-color: #5378e2"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card" style="background-color: #3dcaf6">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-md-6" style="font-size: 16px; color: white">
+                    <b>Today</b>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    style="font-size: 16px; color: white; text-align: right"
+                  >
+                    <b>{{ date }}</b>
+                  </div>
+                  <div
+                    class="col-md-12"
+                    style="font-size: 30px; color: white; text-align: center"
+                  >
+                    <b>{{ person }}</b>
+                  </div>
+                  <div
+                    class="col-md-12"
+                    style="font-size: 12px; color: white; text-align: center"
+                  >
+                    <b>Total number of vehicles</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card" style="background-color: #6e6ef9">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-md-6" style="font-size: 16px; color: white">
+                    <b>This month</b>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    style="font-size: 16px; color: white; text-align: right"
+                  >
+                    <b>{{ dateM }}</b>
+                  </div>
+                  <div
+                    class="col-md-12"
+                    style="font-size: 30px; color: white; text-align: center"
+                  >
+                    <b>{{ personM }}</b>
+                  </div>
+                  <div
+                    class="col-md-12"
+                    style="font-size: 12px; color: white; text-align: center"
+                  >
+                    <b>Total number of vehicles</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card" style="background-color: #e78cfa">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-md-6" style="font-size: 16px; color: white">
+                    <b>This Year</b>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    style="font-size: 16px; color: white; text-align: right"
+                  >
+                    <b>{{ dateY }}</b>
+                  </div>
+                  <div
+                    class="col-md-12"
+                    style="font-size: 30px; color: white; text-align: center"
+                  >
+                    <b>{{ personY }}</b>
+                  </div>
+                  <div
+                    class="col-md-12"
+                    style="font-size: 12px; color: white; text-align: center"
+                  >
+                    <b>Total number of vehicles</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-12 ml-auto mr-auto">
+  <div class="row">
+    <div class="col-lg-12" style="padding-bottom: 5px; padding-right: 5px">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-10" style="padding: 12px 0px 12px 27px">
+            <b style="font-size: 20px"
+              >{{ dateFrom }} to {{ dateTo }} &nbsp;&nbsp;&nbsp; (Total
+              {{ totalPerson }})</b
+            >
+          </div>
+          <div class="col-lg-2" style="text-align: right"></div>
+        </div>
+        <div class="card-body" style="padding-bottom: 0px">
+          <canvas id="totalChart" height="100px"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-10" style="padding: 12px 0px 12px 27px">
+            <b style="font-size: 20px">Brand</b>
+          </div>
+          <div class="col-lg-2" style="text-align: right"></div>
+        </div>
+        <div class="card-body" style="padding-bottom: 0px">
+          <canvas id="brandlChart" height="100px"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- colorChart -->
+    <div class="col-lg-7" style="padding-bottom: 5px; padding-right: 5px">
+      <div class="card" style="height: 350px; margin-bottom: 5px">
+        <div class="row">
+          <div class="col-lg-10" style="padding: 12px 0px 12px 27px">
+            <b style="font-size: 20px">Color</b>
+          </div>
+          <div class="col-lg-2" style="text-align: right"></div>
+        </div>
+        <div class="card-body" style="padding-bottom: 0px">
+          <!-- <canvas id="colorChart" height="100px"></canvas> -->
+          <!-- <table>
+              <tr *ngFor="let row of labelColor;let i = index">
+                  <td><b>•  {{row}} ({{dataColor[i]}})</b></td>
+              </tr>
+            </table> -->
+          <dx-data-grid
+            id="gridLprColor"
+            [dataSource]="lprColor"
+            [showRowLines]="true"
+            [showBorders]="true"
+            [allowColumnReordering]="true"
+            [allowColumnResizing]="true"
+            [columnAutoWidth]="true"
+            [rowAlternationEnabled]="true"
+          >
+            <dxo-paging [pageSize]="4"></dxo-paging>
+            <dxo-search-panel
+              [visible]="true"
+              [width]="240"
+              placeholder="Search..."
+            ></dxo-search-panel>
+
+            <dxi-column dataField="no" caption="#"></dxi-column>
+            <dxi-column
+              alignment="center"
+              dataField="color"
+              caption="Color"
+            ></dxi-column>
+            <dxi-column
+              alignment="center"
+              caption="count"
+              dataField="count"
+            ></dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5" style="padding-bottom: 5px; padding-right: 5px">
+      <div class="card" style="height: 350px; margin-bottom: 5px">
+        <div class="row">
+          <div class="col-lg-10" style="padding: 12px 0px 12px 27px">
+            <b style="font-size: 20px">Type</b>
+          </div>
+          <div class="col-lg-2" style="text-align: right"></div>
+        </div>
+        <div class="card-body" style="padding-bottom: 0px">
+          <canvas id="typesChart" height="150px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

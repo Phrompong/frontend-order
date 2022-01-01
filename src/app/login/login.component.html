@@ -1,0 +1,21 @@
+<div style="padding: 50px">
+  <dx-data-grid id="orderData" [dataSource]="orderData">
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-search-panel
+      [visible]="true"
+      [width]="240"
+      placeholder="Search..."
+    ></dxo-search-panel>
+
+    <dxi-column alignment="center" dataField="model"></dxi-column>
+    <dxi-column alignment="center" dataField="property"></dxi-column>
+    <dxi-column alignment="center" dataField="color"></dxi-column>
+    <dxi-column alignment="center" dataField="num"></dxi-column>
+    <dxi-column alignment="center" dataField="cod"></dxi-column>
+    <dxi-column alignment="center" dataField="total"></dxi-column>
+    <dxi-column alignment="center" dataField="name"></dxi-column>
+    <dxi-column alignment="center" dataField="address"></dxi-column>
+    <dxi-column alignment="center" dataField="tel"></dxi-column>
+    <dxi-column alignment="center" dataField="admin"></dxi-column>
+  </dx-data-grid>
+</div>

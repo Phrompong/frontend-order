@@ -1,0 +1,506 @@
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [position]="{ of: '#employee' }"
+  [(visible)]="loadingVisible"
+  [showIndicator]="true"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false"
+>
+</dx-load-panel>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card" style="margin-bottom: 15px">
+      <div class="card-body">
+        <div class="col-lg-12">
+          <form
+            #searchReportFace="ngForm"
+            (ngSubmit)="search(searchReportFace.value)"
+          >
+            <div class="row">
+              <div class="col-lg-1" style="display: flex; align-items: center">
+                <b style="font-size: 15px"> Date </b>
+              </div>
+
+              <div class="col-lg-2" style="display: flex; align-items: center">
+                <mat-form-field>
+                  <input
+                    matInput
+                    [matDatepicker]="startDate"
+                    placeholder="mm/dd/yyyy"
+                    (click)="startDate.open()"
+                    name="startDate"
+                    id="startDate"
+                    ngModel
+                    [(ngModel)]="startDateV"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="startDate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #startDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-1" style="display: flex; align-items: center">
+                To
+              </div>
+              <div class="col-lg-2" style="display: flex; align-items: center">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="mm/dd/yyyy"
+                    [matDatepicker]="endDate"
+                    (click)="endDate.open()"
+                    name="endDate"
+                    id="endDate"
+                    ngModel
+                    [(ngModel)]="endDateV"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="endDate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #endDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div
+                class="col-lg-1"
+                style="
+                  display: flex;
+                  justify-content: flex-end;
+                  align-items: center;
+                  font-size: 15px;
+                "
+              >
+                <b>Country</b>
+              </div>
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <mat-select
+                    [(ngModel)]="country"
+                    name="country"
+                    ariaLabel="countryData[0]"
+                  >
+                    <mat-option value=""> ALL </mat-option>
+                    <mat-option
+                      *ngFor="let country of countryData"
+                      [value]="country"
+                    >
+                      {{ country }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div
+                class="col-lg-1"
+                style="display: flex; align-items: center; font-size: 15px"
+              >
+                <b> Brand </b>
+              </div>
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <mat-select
+                    [(ngModel)]="make"
+                    name="make"
+                    ariaLabel="brandData[0]"
+                  >
+                    <mat-option value=""> ALL </mat-option>
+                    <mat-option *ngFor="let brand of brandData" [value]="brand">
+                      {{ brand }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div
+                class="col-lg-1"
+                style="
+                  display: flex;
+                  justify-content: flex-end;
+                  align-items: center;
+                  font-size: 15px;
+                "
+              >
+                <b> Model </b>
+              </div>
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <mat-select
+                    [(ngModel)]="model"
+                    name="model"
+                    ariaLabel="modelData[0]"
+                  >
+                    <mat-option value=""> ALL </mat-option>
+                    <mat-option *ngFor="let model of modelData" [value]="model">
+                      {{ model }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div
+                class="col-lg-1"
+                style="display: flex; align-items: center; font-size: 15px"
+              >
+                <b> Color </b>
+              </div>
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <mat-select
+                    [(ngModel)]="vehicleColor"
+                    name="vehicleColor"
+                    ariaLabel="vehicleColorData[0]"
+                  >
+                    <mat-option value=""> ALL </mat-option>
+                    <mat-option
+                      *ngFor="let color of vehicleColorData"
+                      [value]="color"
+                    >
+                      {{ color }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div
+                class="col-lg-1"
+                style="
+                  display: flex;
+                  justify-content: flex-end;
+                  align-items: center;
+                  font-size: 15px;
+                "
+              >
+                <b> Plate number </b>
+              </div>
+
+              <div class="col-lg-5" style="display: flex; align-items: center">
+                <mat-form-field>
+                  <input
+                    matInput
+                    name="plateNumber"
+                    id="plateNumber"
+                    ngModel
+                    [(ngModel)]="plateNumber"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- <div class="row">
+            <div
+              class="col-lg-1"
+              style="
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                font-size: 20px;
+              "
+            >
+              <b> Type </b>
+            </div>
+            <div class="col-lg-5">
+              <mat-form-field>
+                <input
+                  (keyup)="onKeyType($event)"
+                  matInput
+                  name="type"
+                  id="type"
+           
+                  ngModel
+                  [(ngModel)] = "typeS"
+                  
+                />
+              </mat-form-field>
+            </div>
+                        <div
+              class="col-lg-1"
+              style="
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                font-size: 20px;
+              "
+            >
+              <b> Brand </b>
+            </div>
+            <div class="col-lg-5">
+              <mat-form-field>
+                <input
+                  (keyup)="onKeyBrand($event)"
+                  matInput
+                  name="brand"
+                  id="brand"
+           
+                  ngModel
+                  [(ngModel)] = "brandS"
+                  
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div
+              class="col-lg-1"
+              style="
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                font-size: 20px;
+              "
+            >
+              <b> Color </b>
+            </div>
+            <div class="col-lg-5">
+              <mat-form-field>
+                <input
+                  (keyup)="onKeyType($event)"
+                  matInput
+                  name="type"
+                  id="type"
+           
+                  ngModel
+                  [(ngModel)] = "typeS"
+                  
+                />
+              </mat-form-field>
+            </div>
+                        <div
+              class="col-lg-1"
+              style="
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                font-size: 20px;
+              "
+            >
+              <b> Blacklist </b>
+            </div>
+            <div class="col-lg-5">
+              <mat-form-field>
+                <input
+                  (keyup)="onKeyBrand($event)"
+                  matInput
+                  name="brand"
+                  id="brand"
+           
+                  ngModel
+                  [(ngModel)] = "brandS"
+                  
+                />
+              </mat-form-field>
+            </div>
+          </div> -->
+
+            <div class="row">
+              <div
+                class="col-lg-1"
+                style="display: flex; align-items: center; font-size: 15px"
+              >
+                <b> Vehicle lists </b>
+              </div>
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <mat-select
+                    [(ngModel)]="vehicleList"
+                    name="vehicleList"
+                    ariaLabel="vehicleListData[0]"
+                  >
+                    <mat-option value=""> ALL </mat-option>
+                    <mat-option
+                      *ngFor="let list of vehicleListData"
+                      [value]="vehicleList"
+                    >
+                      {{ vehicleList }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div
+                class="col-lg-1"
+                style="
+                  display: flex;
+                  justify-content: flex-end;
+                  align-items: center;
+                  font-size: 15px;
+                "
+              >
+                <b> Lane name </b>
+              </div>
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <mat-select
+                    [(ngModel)]="laneName"
+                    name="laneName"
+                    ariaLabel="laneNameData[0]"
+                  >
+                    <mat-option value=""> ALL </mat-option>
+                    <mat-option
+                      *ngFor="let laneName of laneNameData"
+                      [value]="laneName"
+                    >
+                      {{ laneName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3 ml-auto">
+              <div class="row" style="display: flex; justify-content: flex-end">
+                <div>
+                  <button
+                    type="button"
+                    class="btn btn-sm mat-raised-button mat-button-base"
+                    (click)="onClickClear()"
+                  >
+                    Clear
+                  </button>
+                </div>
+                <div style="padding-left: 50px">
+                  <button
+                    mat-raised-button
+                    style="background-color: #5378e2"
+                    class="btn btn-sm"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 10px">
+      <div class="card-body">
+        <dx-data-grid
+          id="gridLprReport"
+          [dataSource]="lprReportData"
+          [showRowLines]="true"
+          [showBorders]="true"
+          [allowColumnReordering]="true"
+          [allowColumnResizing]="true"
+          [columnAutoWidth]="true"
+          [rowAlternationEnabled]="true"
+        >
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-search-panel
+            [visible]="true"
+            [width]="240"
+            placeholder="Search..."
+          ></dxo-search-panel>
+
+          <dxi-column dataField="no" caption="#"></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="createdDate"
+            dataType="date"
+            caption="Date / Time"
+            format="dd/MM/yyyy HH:mm:ss"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            caption="Sceen image"
+            dataField="sceenPicture"
+            [width]="150"
+            cellTemplate="cellTemplate"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            caption="Plate image"
+            dataField="platePicture"
+            [width]="150"
+            cellTemplate="cellTemplate"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="plateNumber"
+            caption="Plate number"
+            [width]="100"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="vehicleType"
+            caption="Type"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            caption="Vehicle list"
+            dataField="vehicleList"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="laneName"
+            caption="Lane name"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="make"
+            caption="Brand"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="model"
+            caption="Model"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            dataField="vehicleColor"
+            caption="Color"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            caption="Camera"
+            dataField="camera"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            caption="Location"
+            dataField="country"
+          ></dxi-column>
+
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <div *ngIf="data.value != 'data:image/png;base64,'">
+              <img [src]="data.value" [height]="100" [width]="100" />
+            </div>
+            <div *ngIf="data.value == 'data:image/png;base64,'">-</div>
+          </div>
+        </dx-data-grid>
+      </div>
+      <div class="row">
+        <div class="col-lg-9"></div>
+        <div
+          class="col-lg-1"
+          style="display: flex; align-items: center; font-size: 15px"
+        >
+          <b> Page </b>
+        </div>
+        <div class="col-lg-2">
+          <mat-form-field>
+            <mat-select
+              [(ngModel)]="cPage"
+              name="cPage"
+              ariaLabel="cPage"
+              (selectionChange)="changePage($event)"
+            >
+              <mat-option
+                *ngFor="let in of counter(cPages); let i = index"
+                value="{{ i + 1 }}"
+                >{{ i + 1 }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
